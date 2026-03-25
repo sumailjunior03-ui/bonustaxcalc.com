@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bonus Tax Calculator | BonusTaxCalc.com</title>
+  <meta name="description" content="Estimate federal bonus withholding using standard supplemental wage rate rules in a deterministic browser-based calculator.">
+  <link rel="canonical" href="https://bonustaxcalc.com/">
+  <meta name="robots" content="index, follow">
+  <meta name="google-adsense-account" content="ca-pub-7744853829365165">
+  <meta property="og:title" content="Bonus Tax Calculator | BonusTaxCalc.com">
+  <meta property="og:description" content="Estimate federal bonus withholding using standard supplemental wage rate rules in a deterministic browser-based calculator.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bonustaxcalc.com/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7744853829365165" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Bonus Tax Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","url":"https://bonustaxcalc.com/","description":"Estimate federal bonus withholding using standard supplemental wage rate rules in a deterministic browser-based calculator.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script src="/network.js" defer></script>
+  <script src="/site.js" defer></script>
+</head>
+<body data-site-name="BonusTaxCalc.com">
+  <header class="site-header container">
+    <div class="brand"><a href="/">BonusTaxCalc.com</a></div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="hero-card">
+        <h1>Bonus Tax Calculator</h1>
+        <p>Estimate federal withholding on a bonus using the standard supplemental wage rules. Calculations run locally in your browser. No account. No stored data.</p>
+        <p class="small">This tool provides a narrow estimate only. Verify final withholding with payroll records or official IRS guidance.</p>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="grid">
+        <div class="panel">
+          <h2>Calculator Tool</h2>
+          <form id="bonusTaxForm" class="calc-form">
+            <label for="bonusAmount">Current bonus amount</label>
+            <input id="bonusAmount" name="bonusAmount" type="number" min="0" step="0.01" value="5000">
+
+            <label for="yearToDateSupplemental">Prior supplemental wages this year</label>
+            <input id="yearToDateSupplemental" name="yearToDateSupplemental" type="number" min="0" step="0.01" value="0">
+
+            <label for="filingStatus">Filing status</label>
+            <select id="filingStatus" name="filingStatus">
+              <option value="Single">Single</option>
+              <option value="Married filing jointly">Married filing jointly</option>
+              <option value="Head of household">Head of household</option>
+            </select>
+
+            <button class="button" type="submit">Estimate bonus withholding</button>
+          </form>
+          <div id="results" aria-live="polite"></div>
+        </div>
+
+        <div class="panel">
+          <h2>When This Calculator Is Useful</h2>
+          <p>This calculator is useful when you want a fast federal-only estimate for a bonus, incentive payment, retention payment, commission payout, or another supplemental wage item that may be withheld differently from regular salary. It is built for users who want a simple answer before the payroll date arrives.</p>
+          <p>It is especially useful when you are comparing multiple bonus amounts, checking how year-to-date supplemental wages affect the federal withholding rate, or reviewing a rough after-withholding estimate before talking to payroll.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="panel">
+        <h2>What This Calculator Does</h2>
+        <p>This calculator estimates the federal withholding on a bonus or other supplemental wage payment using the standard flat supplemental wage rate. For most bonuses under the federal threshold, the estimate uses <strong>22%</strong>. When total supplemental wages exceed the high-threshold level, the estimate uses <strong>37%</strong> on the current bonus for a deterministic top-line estimate.</p>
+        <p>It answers the narrow question, “How much federal withholding might come out of my bonus?” It does not try to model state taxes, payroll system customizations, retirement contributions, or every employer-specific pay configuration.</p>
+        <div class="callout">This tool is intentionally narrow and factual. It gives an estimate, not payroll advice.</div>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="panel">
+        <h2>Example Calculation</h2>
+        <p>Suppose you receive a <strong>$10,000</strong> bonus and your year-to-date supplemental wages before this payment are <strong>$0</strong>. Under the standard flat federal supplemental rate, the withholding estimate is:</p>
+        <ul class="info-list">
+          <li>Federal withholding rate: <strong>22%</strong></li>
+          <li>Estimated federal withholding: <strong>$2,200</strong></li>
+          <li>Estimated net after federal withholding: <strong>$7,800</strong></li>
+        </ul>
+        <p>If the current bonus plus prior supplemental wages pushes the annual total above the high federal threshold, the estimate switches to <strong>37%</strong> for the current bonus amount.</p>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="grid">
+        <div class="panel">
+          <h2>Formula</h2>
+          <p><strong>Estimated federal withholding = Current bonus amount × Federal supplemental wage rate</strong></p>
+          <p><strong>Estimated net bonus = Current bonus amount − Estimated federal withholding</strong></p>
+          <p>Federal supplemental wage rate used here:</p>
+          <ul class="info-list">
+            <li><strong>22%</strong> when total supplemental wages do not exceed $1,000,000</li>
+            <li><strong>37%</strong> when total supplemental wages exceed $1,000,000</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h2>Calculation Methodology</h2>
+          <p>This calculator applies the flat federal supplemental wage withholding method in a deterministic way. It adds the current bonus to the year-to-date supplemental wages entered by the user. If that total is above $1,000,000, the calculator applies a 37% federal withholding estimate to the current bonus. Otherwise, it applies 22%.</p>
+          <p>The output is federal-only by design. It does not include state income tax, Social Security, Medicare, retirement deductions, insurance deductions, or employer-specific payroll adjustments. Filing status is displayed for user context but is not used to change the flat federal supplemental rate in this tool.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="grid">
+        <div class="panel">
+          <h2>Example Scenarios</h2>
+          <ul class="info-list">
+            <li><strong>Year-end bonus review:</strong> Estimate the federal withholding on a one-time bonus before the payment date.</li>
+            <li><strong>Retention payment planning:</strong> Check a rough federal-only estimate for a retention or sign-on payout.</li>
+            <li><strong>High-income threshold check:</strong> See whether prior supplemental wages may push the current bonus estimate to the 37% rate.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h2>Understanding Bonus Withholding</h2>
+          <p>Bonus withholding often looks higher than expected because employers commonly use the supplemental wage rules for federal withholding rather than the same process used for regular salary. That withholding amount is not always the same thing as your final annual tax liability.</p>
+          <p>This is why a clean estimate tool is useful: it gives you a quick federal-only preview of what may be withheld from the payment itself, while still keeping the explanation narrow and verifiable.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="panel">
+        <h2>Common Scenarios</h2>
+        <ul class="info-list">
+          <li><strong>Annual bonus:</strong> Estimate how much federal withholding may come out of a standard year-end bonus.</li>
+          <li><strong>Commission or supplemental pay:</strong> Use a quick federal-only estimate for taxable supplemental wages paid outside normal salary.</li>
+          <li><strong>Threshold check:</strong> Test whether high total supplemental wages may push the current bonus estimate to the higher federal rate.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="panel">
+        <h2>FAQ</h2>
+        <h3>Does this calculator include state taxes?</h3>
+        <p>No. This is a federal-only estimate.</p>
+        <h3>Does this calculator include Social Security or Medicare?</h3>
+        <p>No. It focuses on federal supplemental wage withholding only.</p>
+        <h3>Why does the rate switch to 37%?</h3>
+        <p>That higher rate is used when total supplemental wages exceed the high-threshold level used by federal withholding rules.</p>
+        <h3>Is this my final bonus take-home pay?</h3>
+        <p>No. Actual payroll outcomes may differ because of state taxes, deductions, and employer payroll handling.</p>
+      </div>
+    </section>
+
+    <section class="container section">
+      <div class="panel">
+        <h2>Related Calculators</h2>
+        <div data-related-calculators></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer container" data-footer></footer>
+</body>
+</html>
