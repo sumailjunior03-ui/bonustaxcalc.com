@@ -4,160 +4,163 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bonus Tax Calculator | BonusTaxCalc.com</title>
-  <meta name="description" content="Estimate federal bonus withholding using standard supplemental wage rate rules in a deterministic browser-based calculator.">
+  <meta name="description" content="Estimate federal withholding on a bonus using supplemental wage rules. Includes Social Security, Medicare, and the $1M split-rate threshold.">
   <link rel="canonical" href="https://bonustaxcalc.com/">
   <meta name="robots" content="index, follow">
   <meta name="google-adsense-account" content="ca-pub-7744853829365165">
-  <meta property="og:title" content="Bonus Tax Calculator | BonusTaxCalc.com">
-  <meta property="og:description" content="Estimate federal bonus withholding using standard supplemental wage rate rules in a deterministic browser-based calculator.">
   <meta property="og:type" content="website">
+  <meta property="og:title" content="Bonus Tax Calculator | BonusTaxCalc.com">
+  <meta property="og:description" content="Estimate federal withholding on a bonus using supplemental wage rules. Includes Social Security, Medicare, and split-rate calculation.">
   <meta property="og:url" content="https://bonustaxcalc.com/">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:site_name" content="BonusTaxCalc.com">
+  <meta name="twitter:card" content="summary">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7744853829365165" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="/styles.css">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Bonus Tax Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","url":"https://bonustaxcalc.com/","description":"Estimate federal bonus withholding using standard supplemental wage rate rules in a deterministic browser-based calculator.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-  <script src="/network.js" defer></script>
-  <script src="/site.js" defer></script>
+  <link rel="stylesheet" href="/styles.css?v=bonus-tax-fix-0502">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Bonus Tax Calculator","applicationCategory":"FinanceApplication","operatingSystem":"Any","url":"https://bonustaxcalc.com/","description":"Estimate federal withholding on a bonus using supplemental wage rules. Includes Social Security, Medicare, and the $1M split-rate threshold.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 </head>
-<body data-site-name="BonusTaxCalc.com">
-  <header class="site-header container">
-    <div class="brand"><a href="/">BonusTaxCalc.com</a></div>
-  </header>
-
-  <main>
-    <section class="hero container">
-      <div class="hero-card">
-        <h1>Bonus Tax Calculator</h1>
-        <p>Estimate federal withholding on a bonus using the standard supplemental wage rules. Calculations run locally in your browser. No account. No stored data.</p>
-        <p class="small">This tool provides a narrow estimate only. Verify final withholding with payroll records or official IRS guidance.</p>
-      </div>
-    </section>
-
-    <section class="container section">
-      <div class="grid">
-        <div class="panel">
-          <h2>Calculator Tool</h2>
-          <form id="bonusTaxForm" class="calc-form">
-            <label for="bonusAmount">Current bonus amount</label>
-            <input id="bonusAmount" name="bonusAmount" type="number" min="0" step="0.01" value="5000">
-
-            <label for="yearToDateSupplemental">Prior supplemental wages this year</label>
-            <input id="yearToDateSupplemental" name="yearToDateSupplemental" type="number" min="0" step="0.01" value="0">
-
-            <label for="filingStatus">Filing status</label>
-            <select id="filingStatus" name="filingStatus">
-              <option value="Single">Single</option>
-              <option value="Married filing jointly">Married filing jointly</option>
-              <option value="Head of household">Head of household</option>
-            </select>
-
-            <button class="button" type="submit">Estimate bonus withholding</button>
-          </form>
-          <div id="results" aria-live="polite"></div>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <div class="brand">
+      <h1>Bonus Tax Calculator</h1>
+      <p>What actually comes out of your bonus</p>
+    </div>
+    <div data-site-header-nav></div>
+  </div>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <h2>Enter your bonus details</h2>
+    <div class="form-card">
+      <form id="bonusTaxForm" class="calc-form">
+        <div class="field">
+          <label for="bonusAmount">Bonus amount (USD)</label>
+          <input id="bonusAmount" type="number" min="0" step="0.01" value="10000">
         </div>
-
-        <div class="panel">
-          <h2>When This Calculator Is Useful</h2>
-          <p>This calculator is useful when you want a fast federal-only estimate for a bonus, incentive payment, retention payment, commission payout, or another supplemental wage item that may be withheld differently from regular salary. It is built for users who want a simple answer before the payroll date arrives.</p>
-          <p>It is especially useful when you are comparing multiple bonus amounts, checking how year-to-date supplemental wages affect the federal withholding rate, or reviewing a rough after-withholding estimate before talking to payroll.</p>
+        <div class="field">
+          <label for="ytdSupplemental">Year-to-date supplemental wages (before this bonus)</label>
+          <input id="ytdSupplemental" type="number" min="0" step="0.01" value="0">
         </div>
-      </div>
-    </section>
-
-    <section class="container section">
-      <div class="panel">
-        <h2>What This Calculator Does</h2>
-        <p>This calculator estimates the federal withholding on a bonus or other supplemental wage payment using the standard flat supplemental wage rate. For most bonuses under the federal threshold, the estimate uses <strong>22%</strong>. When total supplemental wages exceed the high-threshold level, the estimate uses <strong>37%</strong> on the current bonus for a deterministic top-line estimate.</p>
-        <p>It answers the narrow question, “How much federal withholding might come out of my bonus?” It does not try to model state taxes, payroll system customizations, retirement contributions, or every employer-specific pay configuration.</p>
-        <div class="callout">This tool is intentionally narrow and factual. It gives an estimate, not payroll advice.</div>
-      </div>
-    </section>
-
-    <section class="container section">
-      <div class="panel">
-        <h2>Example Calculation</h2>
-        <p>Suppose you receive a <strong>$10,000</strong> bonus and your year-to-date supplemental wages before this payment are <strong>$0</strong>. Under the standard flat federal supplemental rate, the withholding estimate is:</p>
-        <ul class="info-list">
-          <li>Federal withholding rate: <strong>22%</strong></li>
-          <li>Estimated federal withholding: <strong>$2,200</strong></li>
-          <li>Estimated net after federal withholding: <strong>$7,800</strong></li>
-        </ul>
-        <p>If the current bonus plus prior supplemental wages pushes the annual total above the high federal threshold, the estimate switches to <strong>37%</strong> for the current bonus amount.</p>
-      </div>
-    </section>
-
-    <section class="container section">
-      <div class="grid">
-        <div class="panel">
-          <h2>Formula</h2>
-          <p><strong>Estimated federal withholding = Current bonus amount × Federal supplemental wage rate</strong></p>
-          <p><strong>Estimated net bonus = Current bonus amount − Estimated federal withholding</strong></p>
-          <p>Federal supplemental wage rate used here:</p>
-          <ul class="info-list">
-            <li><strong>22%</strong> when total supplemental wages do not exceed $1,000,000</li>
-            <li><strong>37%</strong> when total supplemental wages exceed $1,000,000</li>
-          </ul>
+        <div class="field">
+          <label for="ytdTotalWages">Year-to-date total wages (salary + bonuses, before this bonus)</label>
+          <input id="ytdTotalWages" type="number" min="0" step="0.01" value="85000">
         </div>
-        <div class="panel">
-          <h2>Calculation Methodology</h2>
-          <p>This calculator applies the flat federal supplemental wage withholding method in a deterministic way. It adds the current bonus to the year-to-date supplemental wages entered by the user. If that total is above $1,000,000, the calculator applies a 37% federal withholding estimate to the current bonus. Otherwise, it applies 22%.</p>
-          <p>The output is federal-only by design. It does not include state income tax, Social Security, Medicare, retirement deductions, insurance deductions, or employer-specific payroll adjustments. Filing status is displayed for user context but is not used to change the flat federal supplemental rate in this tool.</p>
-        </div>
-      </div>
-    </section>
+        <button type="submit" class="btn">Estimate withholding</button>
+      </form>
+    </div>
+    <div id="results" aria-live="polite"></div>
+  </section>
 
-    <section class="container section">
-      <div class="grid">
-        <div class="panel">
-          <h2>Example Scenarios</h2>
-          <ul class="info-list">
-            <li><strong>Year-end bonus review:</strong> Estimate the federal withholding on a one-time bonus before the payment date.</li>
-            <li><strong>Retention payment planning:</strong> Check a rough federal-only estimate for a retention or sign-on payout.</li>
-            <li><strong>High-income threshold check:</strong> See whether prior supplemental wages may push the current bonus estimate to the 37% rate.</li>
-          </ul>
-        </div>
-        <div class="panel">
-          <h2>Understanding Bonus Withholding</h2>
-          <p>Bonus withholding often looks higher than expected because employers commonly use the supplemental wage rules for federal withholding rather than the same process used for regular salary. That withholding amount is not always the same thing as your final annual tax liability.</p>
-          <p>This is why a clean estimate tool is useful: it gives you a quick federal-only preview of what may be withheld from the payment itself, while still keeping the explanation narrow and verifiable.</p>
-        </div>
-      </div>
-    </section>
+  <section class="section-card">
+    <h2>Why your bonus feels overtaxed</h2>
+    <p>You were told $10,000. You received $7,035. That's nearly 30% gone before you see it.</p>
+    <p>The shock comes from stacking. It's not one tax — it's three or four deductions piled on top of each other. Federal supplemental withholding takes 22% right off the top. Then Social Security takes 6.2%. Medicare takes 1.45%. If you're already earning above $200,000, there's an additional 0.9% Medicare surcharge. None of these are negotiable — your employer withholds them before the money reaches your account.</p>
+    <p>And if you're in a state with income tax, your actual deposit can be even lower than what this shows.</p>
+  </section>
 
-    <section class="container section">
-      <div class="panel">
-        <h2>Common Scenarios</h2>
-        <ul class="info-list">
-          <li><strong>Annual bonus:</strong> Estimate how much federal withholding may come out of a standard year-end bonus.</li>
-          <li><strong>Commission or supplemental pay:</strong> Use a quick federal-only estimate for taxable supplemental wages paid outside normal salary.</li>
-          <li><strong>Threshold check:</strong> Test whether high total supplemental wages may push the current bonus estimate to the higher federal rate.</li>
-        </ul>
-      </div>
-    </section>
+  <section class="section-card">
+    <h2>What actually gets taken out of a bonus</h2>
+    <p>Four deductions can apply to your bonus. Here's what each one is:</p>
+    <ul>
+      <li><strong>Federal supplemental withholding (22% or 37%).</strong> This is what your employer sends to the IRS right away. It's not your final tax rate — it's a mandatory prepayment. 22% applies to most bonuses. If your total supplemental wages for the year exceed $1,000,000, the portion above $1M gets withheld at 37%.</li>
+      <li><strong>Social Security (6.2%).</strong> Applies just like regular wages, but stops once your total earnings hit $176,100 in 2025. If your regular salary already passed that cap, your bonus has zero Social Security withholding.</li>
+      <li><strong>Medicare (1.45%).</strong> No cap. Every dollar of your bonus gets hit with this.</li>
+      <li><strong>Additional Medicare (0.9%).</strong> If your total wages exceed $200,000, an extra 0.9% kicks in on the amount above that threshold. Only the portion of your bonus above $200,000 is taxed at this rate.</li>
+    </ul>
+  </section>
 
-    <section class="container section">
-      <div class="panel">
-        <h2>FAQ</h2>
-        <h3>Does this calculator include state taxes?</h3>
-        <p>No. This is a federal-only estimate.</p>
-        <h3>Does this calculator include Social Security or Medicare?</h3>
-        <p>No. It focuses on federal supplemental wage withholding only.</p>
-        <h3>Why does the rate switch to 37%?</h3>
-        <p>That higher rate is used when total supplemental wages exceed the high-threshold level used by federal withholding rules.</p>
-        <h3>Is this my final bonus take-home pay?</h3>
-        <p>No. Actual payroll outcomes may differ because of state taxes, deductions, and employer payroll handling.</p>
-      </div>
-    </section>
+  <section class="section-card">
+    <h2>The 22% number — what it really means</h2>
+    <p>22% is the withholding rate, not your tax rate. Your employer uses it because the IRS allows a flat supplemental rate instead of running your bonus through the regular withholding tables.</p>
+    <p>This means 22% might be too low. If you're in the 24% marginal bracket ($103,350+ for single filers in 2025), the 22% withholding on your bonus is 2% short. You'll owe the difference when you file. If you're in the 32% or 35% bracket, the gap is even wider.</p>
+    <p>It could also be too high. If deductions and credits pull your taxable income into a lower bracket, you'll get a refund on the excess withholding.</p>
+    <p>Bonuses are not taxed at a special rate when you file — they're treated as regular income at your marginal bracket, same as your salary. The 22% withholding is just a prepayment method.</p>
+    <p>And for high earners: the $1,000,000 supplemental threshold works as a split rate. Only the portion of supplemental wages <strong>exceeding</strong> $1M is withheld at 37%. Everything below that stays at 22%. If you've already earned $900,000 in supplemental wages and get a $200,000 bonus, the first $100,000 is withheld at 22% and the remaining $100,000 at 37% — not the entire bonus at 37%.</p>
+  </section>
 
-    <section class="container section">
-      <div class="panel">
-        <h2>Related Calculators</h2>
-        <div data-related-calculators></div>
-      </div>
-    </section>
-  </main>
+  <section class="section-card">
+    <h2>Example: $10,000 bonus, single filer, $85,000 salary</h2>
+    <table class="example-table">
+      <tr><th>Deduction</th><th>Rate</th><th>Amount</th></tr>
+      <tr><td>Federal supplemental withholding</td><td>22%</td><td>−$2,200</td></tr>
+      <tr><td>Social Security</td><td>6.2%</td><td>−$620</td></tr>
+      <tr><td>Medicare</td><td>1.45%</td><td>−$145</td></tr>
+      <tr><td>Additional Medicare</td><td>0.9%</td><td>$0 (total wages $95K, under $200K)</td></tr>
+      <tr><td><strong>Total withholding</strong></td><td></td><td><strong>−$2,965</strong></td></tr>
+      <tr><td><strong>What you actually receive</strong></td><td></td><td><strong>$7,035</strong></td></tr>
+    </table>
+    <p>The surprise isn't the 22% — people somewhat expect that. The surprise is the FICA stack. Social Security takes another $620 and Medicare takes $145. That extra $765 is what makes the gap feel bigger than expected.</p>
+    <p>And here's the part people miss: if you're in the 24% marginal bracket, the 22% withholding on your bonus is actually 2% too low. When you file your return, you'll owe the difference. So not only did $2,965 come out of your check — you might still owe more at tax time.</p>
+  </section>
 
-  <footer class="site-footer container" data-footer></footer>
+  <section class="section-card">
+    <h2>Why your bonus check looks smaller than expected</h2>
+    <p>The FICA stack is the main culprit. Federal withholding alone on a $10,000 bonus is $2,200 — that's the number most people expect. But then Social Security adds $620 and Medicare adds $145. You're already at $2,965 before state taxes enter the picture.</p>
+    <p>If you're in a state with income tax, your actual deposit can be even lower than what this shows. California, New York, and other high-tax states can take another 5–10% off the top.</p>
+    <p>The other confusion: withholding is not the same as tax liability. Your bonus was withheld at 22%, but your actual tax on that bonus depends on your marginal bracket. You might owe more. You might get a refund. The withholding is a prepayment, not a final bill.</p>
+  </section>
+
+  <section class="section-card">
+    <h2>High-income scenarios: when the math shifts</h2>
+    <p><strong>Already over the Social Security cap.</strong> If your year-to-date wages already exceed $176,100, Social Security drops to zero on your bonus. That's a 6.2% savings compared to someone still under the cap. A $20,000 bonus for someone over the cap has $1,240 less in Social Security withholding than the same bonus for someone under it.</p>
+    <p><strong>Above $200,000 total wages.</strong> The additional 0.9% Medicare surcharge kicks in. If your year-to-date wages are $195,000 and you get a $10,000 bonus, only the $5,000 above the threshold gets the extra 0.9% — that's $45. Small, but it adds up on larger bonuses.</p>
+    <p><strong>The $1,000,000 supplemental threshold.</strong> If your total supplemental wages for the year cross $1M, only the excess is withheld at 37%. Example: $900,000 in prior supplemental wages plus a $200,000 bonus. The first $100,000 of the bonus (bringing you to $1M) is withheld at 22% = $22,000. The remaining $100,000 (above $1M) is withheld at 37% = $37,000. Total federal withholding: $59,000 — not $74,000.</p>
+  </section>
+
+  <section class="section-card">
+    <h2>Withholding vs. your actual tax bill</h2>
+    <p>This calculator shows you what will be withheld from your bonus — the amount taken out before the money reaches you. That's not the same as your final tax bill.</p>
+    <p>22% is the withholding rate the IRS allows your employer to use on supplemental wages. Your actual tax rate on that bonus could be higher (if you're in the 24%+ bracket) or lower (if deductions and credits pull your taxable income down). The withholding is a prepayment. You settle the difference when you file.</p>
+    <p>Some people get a refund because 22% was more than they actually owed. Others get a smaller refund — or owe — because 22% wasn't enough. The only way to know for sure is to run your full return.</p>
+    <p>This tool tells you what comes out of the check. Not what you'll ultimately owe. Those are two different questions, and understanding the difference is the whole point.</p>
+  </section>
+
+  <section class="section-card">
+    <h2>What this looks like for real people</h2>
+    <ul>
+      <li><strong>Year-end bonus at $85K salary.</strong> $10,000 bonus. Federal takes $2,200, Social Security takes $620, Medicare takes $145. You get $7,035. In California, subtract roughly another $800–$1,000 for state taxes. Your deposit: closer to $6,000.</li>
+      <li><strong>Sign-on bonus mid-year.</strong> $25,000 sign-on at a new job. You've earned $50,000 so far this year at your old job. Total wages after bonus: $75,000. Federal: $5,500, SS: $1,550, Medicare: $362.50. Total withholding: $7,412.50. You receive $17,587.50.</li>
+      <li><strong>Commission-only worker hitting the SS cap early.</strong> You've already earned $180,000 in commissions this year. A $15,000 bonus has zero Social Security withholding because you're over the $176,100 cap. Federal: $3,300, Medicare: $217.50, Additional Medicare: $135 (you're over $200K). Total: $3,652.50. You receive $11,347.50 — better than someone still under the cap.</li>
+      <li><strong>Executive bonus pushing past $200K total wages.</strong> You're at $195,000 YTD and receive a $50,000 bonus. Federal: $11,000, SS: $0 (over cap), Medicare: $725, Additional Medicare: $405 ($45K above threshold × 0.9%). Total withholding: $12,130. You receive $37,870.</li>
+    </ul>
+  </section>
+
+  <section class="section-card">
+    <h2>Plan around the net, not the gross</h2>
+    <ul>
+      <li><strong>Budget with the net number.</strong> When planning how to use your bonus, use the after-withholding amount — not the number on your compensation letter. A $10,000 bonus means $7,035 in your pocket (before state taxes).</li>
+      <li><strong>Adjust your W-4 if the gap is too large.</strong> If you consistently owe money at tax time because the 22% supplemental rate is too low for your bracket, you can increase your regular withholding on your W-4 to cover the shortfall. This won't change your bonus withholding, but it prevents a surprise bill in April.</li>
+      <li><strong>Set aside money if you're in a high bracket.</strong> If your marginal rate is 32% or higher, the 22% supplemental withholding leaves a 10%+ gap. Set aside the difference so you're not caught short at filing.</li>
+      <li><strong>Check your state separately.</strong> This calculator is federal-only. State supplemental withholding rates vary widely — some use a flat rate, others add the bonus to regular wages. Check your state's rules or consult a tax professional.</li>
+    </ul>
+  </section>
+
+  <section class="section-card">
+    <h2>Data Sources</h2>
+    <ul>
+      <li><strong>IRS Publication 15:</strong> Employer's Tax Guide — supplemental wage withholding methods and the $1M threshold rule</li>
+      <li><strong>IRC §3402:</strong> Federal withholding rules for supplemental wages</li>
+      <li><strong>Social Security wage base:</strong> $176,100 for 2025 (SSA.gov)</li>
+      <li><strong>FICA rates:</strong> Social Security 6.2%, Medicare 1.45%, Additional Medicare 0.9% above $200,000</li>
+      <li><strong>Federal supplemental rates:</strong> 22% (standard), 37% (on supplemental wages exceeding $1,000,000)</li>
+    </ul>
+  </section>
+
+  <section class="section-card">
+    <h2>Limitations</h2>
+    <p><strong>Federal only.</strong> No state or local tax calculations. State withholding varies by jurisdiction — check your state's rules separately.</p>
+    <p><strong>Withholding estimate, not tax liability.</strong> This shows what gets withheld from your bonus check. Your actual tax on the bonus depends on your full return — deductions, credits, other income, and filing status all affect the final number.</p>
+    <p><strong>No retirement or benefit deductions.</strong> 401(k) contributions, health insurance, and other pre-tax deductions that may apply to your bonus are not included.</p>
+    <p><strong>Flat supplemental method only.</strong> Some employers use the aggregate method (adding the bonus to your regular paycheck and withholding based on total wages). This calculator uses the flat supplemental method, which is more common for standalone bonus payments.</p>
+    <p><strong>2025 tax year values.</strong> Social Security wage base and supplemental withholding rates are based on 2025 IRS guidance. Values may change in future years.</p>
+    <p><strong>Not tax advice.</strong> Consult a tax professional for decisions about withholding, estimated payments, or tax planning.</p>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap" id="site-footer"></div>
+</footer>
+<script src="/network.js"></script>
+<script src="/app.js"></script>
 </body>
 </html>
