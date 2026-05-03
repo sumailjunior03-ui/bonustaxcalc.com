@@ -28,8 +28,8 @@ function calculateBonusWithholding(bonusAmount, ytdSupplementalWages, ytdTotalWa
     federalWithholding = (amountBelowThreshold * 0.22) + (amountAboveThreshold * 0.37);
   }
 
-  // Step 2: Social Security (6.2%, 2025 wage base $176,100)
-  var ssWageBase = 176100;
+  // Step 2: Social Security (6.2%, 2026 wage base $184,500)
+  var ssWageBase = 184500;
   var totalWagesAfterBonus = ytdTotalWages + bonusAmount;
   var ssTax;
   if (ytdTotalWages >= ssWageBase) {
@@ -89,8 +89,8 @@ function renderResults(r) {
   }
 
   var ssNote = r.ssTax === 0
-    ? "No Social Security — year-to-date wages already exceed $176,100"
-    : "6.2% (stops at $176,100 wage base)";
+    ? "No Social Security — year-to-date wages already exceed $184,500"
+    : "6.2% (stops at $184,500 wage base)";
 
   var addMedicareNote = r.additionalMedicareTax === 0
     ? ""
